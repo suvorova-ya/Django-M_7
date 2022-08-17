@@ -1,0 +1,17 @@
+{% extends 'news_portal/default.html' %}
+
+{% block title %}{{ post.title }}{% endblock title %}
+
+{% block content %}
+
+      <h3>{{ post.title }}</h3>
+<form method="POST">
+     {% csrf_token %}<br>
+     {{ form.as.p }}<br>
+
+    <input type="submit" value="Редактировать профиль">
+</form>
+
+
+{% endblock content %}
+

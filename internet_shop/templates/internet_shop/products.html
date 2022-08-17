@@ -1,0 +1,61 @@
+{% extends 'news_portal/default.html' %}
+{% load custom_filters %}
+
+{% block title %} Products{% endblock title %}
+
+{% block content %}
+
+<br>
+<!-- Перед таблицей добавим форму для поиска -->
+<form method="GET">
+    {{ filter.form }} <!-- Форму от фильтров за нас сделает django. А вот кнопку, увы придётся делать самому -->
+    <input type="submit" value="Найти товар">
+    <br>
+<br>
+<br>
+</form>
+
+<table>
+    <thead>
+        <th>
+           Товар
+        </th>
+        <th>
+            Категория
+        </th>
+        <th>
+            Цена
+        </th>
+        <th>
+            Количество
+        </th>
+    </thead>
+    {% for product in filter.qs %} <!-- поменяем products на filter.qs, т. к. теперь мы забираем уже отобранную по каким-то параметрам информацию -->
+    <tr>
+        <td>
+            {{ product.name|title }}
+        </td>
+        <td>
+            {{ product.category.name|title }}
+        </td>
+
+        <td>
+            {{product.price|currency:'usd'}}
+        </td>
+        <td>
+            {{ product.quantity }}
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+<br>
+<br>
+<br>
+
+<form method="POST">
+    {% csrf_token %}
+    {{ form }} <!-- Теперь нам нужна только готовая форма и кнопка -->
+    <input type="submit" value="Добавить товар">
+</form>
+
+{% endblock content %}

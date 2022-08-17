@@ -1,0 +1,35 @@
+{% extends 'news_portal/default.html' %}
+
+{% block title %}Orders{% endblock title %}
+
+{% block content %}
+   <h1>Все заказы</h1>
+   <hr>
+   {% if orders %}
+       <table>
+           <tr>
+               <td>Дата и время оформления заказа</td>
+               <td>дата и время выдачи заказа</td>
+               <td>Cтоимость заказа</td>
+               <td>Доставка</td>
+               <td>Статус заказа</td>
+               <td>Сотрудник</td>
+           </tr>
+
+
+           {% for order in orders %}
+           <tr>
+               <td>{{ order.time_in }}</td>
+               <td>{{ order.time_out }}</td>
+               <td>{{ order.cost }}</td>
+               <td>{{ order.pickup }}</td>
+               <td>{{ order.complete }}</td>
+               <td>{{ order.staff}}</td>
+           </tr>
+           {% endfor %}
+
+       </table>
+   {% else %}
+       <h2>заказов нет!</h2>
+   {% endif %}
+{% endblock content %}

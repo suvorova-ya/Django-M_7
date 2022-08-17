@@ -1,0 +1,41 @@
+
+{% extends 'news_portal/default.html' %}
+
+
+{% block title %} Category list {% endblock title %}
+
+{% block content %}
+
+<form method="POST">
+    {% csrf_token %}
+    {{ form }}
+    <br>
+    <h3>Subscriptions:</h3>
+
+    <table>
+    <thead>
+        <th>
+           Name category
+        </th>
+    </thead>
+
+
+        {% for cat in category %}
+        <tr>
+                {% if cat.name in user_category %}
+                   <td align="left">
+
+                               {{ cat.name }}
+
+                       <button type="submit" formaction="subscribe" name="id_cat" value="{{ cat.id }}">unsubscribe</button>
+
+                {% else %}
+                   <td align="left">
+                        {{ cat.name }}
+                       <button type="submit" formaction="subscribe" name="id_cat" value="{{ cat.id }}">subscribe</button>
+
+                {% endif %}
+
+        {% endfor %}
+</table>
+{% endblock content %}

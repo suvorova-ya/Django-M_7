@@ -1,0 +1,52 @@
+{% extends 'news_portal/default.html' %}
+
+{% load profanity_filters %}
+
+{% block title %}news{% endblock title %}
+
+{% block content %}
+<form method="GET">
+    {{ filter.form }} <!-- Форму от фильтров за нас сделает django. А вот кнопку, увы придётся делать самому -->
+    <input type="submit" value="Найти">
+
+
+<div class="naz1">
+  <h1>Новости на сайте</h1>
+</div>
+     {% for el in filter.qs %}
+<div class="info">
+               {% for i in el.postCategory.all %}
+                      <div align="left">Категория:{{ i }}</div><br>
+
+    {% endfor %}
+
+            <h2>{{ el.title|censor}}</h2>
+            <p>{{ el.text|censor|truncatechars:50}}</p><br>
+
+
+                <a href="{% url 'details_view' el.id %}"class="btn btn-outline-success">Подробнее о статье</a><br>
+            <div align="right">Дата создания:{{ el.dateCreation }}</div>
+            <div align="right">Автор:{{ el.author }}</div>
+    </div>
+
+{% endfor %}
+<div class="pagination">
+    <span class="step-links">
+        {% if page_obj.has_previous %}
+            <a href="?page=1">&laquo; first</a>
+            <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+        </span>
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">next</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+    </span>
+</div>
+
+{% endblock content %}
+views.py

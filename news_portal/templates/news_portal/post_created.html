@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mailing list</title>
+</head>
+<body>
+
+    <<h1> Hello {{recipient.username}}! New article in your favorite section!</h1>
+    <p>Your subscription:<h3> {{ post.title }} </h3></p>
+     <p> Short description: <h3>{{ post.text|truncatechars:80 }} </h3></p>
+    <p> <a href="http://127.0.0.1:8000{% url 'details_view' post.id %}">Read more</a><br> </p>
+
+</body>
+</html>

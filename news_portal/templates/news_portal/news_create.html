@@ -1,0 +1,25 @@
+{% extends 'news_portal/default.html' %}
+
+{% block title %}{{ title }}{% endblock title %}
+
+{% block content %}
+
+      <h3>{{ post.title }}</h3>
+
+<form method="POST" >
+     {% csrf_token %}<br>
+ <table>
+<tr>
+
+                <td>Заголовок:{{ form.title }}</td><br>
+                 <td>Текст:{{ form.text }}</td>
+                <td>Категория:{{ form.categoryType }}</td>
+                <td>Категория:{{ form.postCategory }}</td>
+                 <td>Автор:{{ form.author }}</td>
+                <td><input type="submit" value="Add news"></td>
+            </tr>
+        </table>
+    </form>
+
+{% endblock content %}
+

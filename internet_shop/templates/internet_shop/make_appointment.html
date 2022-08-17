@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Запись</title>
+</head>
+<body>
+<form action="{%url 'make_appointment' %}" method="POST">
+     {% csrf_token %}
+    <input type="user_name" name="user_name" placeholder="Укажите ФИО">
+    <input type="message" name="message" placeholder="Укажите message">
+    <input type="date" name="date" placeholder="Выберите дату">
+    <input type="submit" value="Отправить">
+    </form>
+
+</body>
+</html>
